@@ -1,7 +1,25 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const user = {
+    name,
+    email,
+    password,
+    phone,
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(user);
+  };
+
   return (
     <section className="text-center text-lg-start d-flex justify-content-center ">
       <div className="container py-4">
@@ -10,13 +28,15 @@ const Register = () => {
             <div className="card cascading-right">
               <div className="card-body p-5 shadow-5 text-center">
                 <h2 className="fw-bold mb-5">Register now</h2>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="col-md-6 mb-4">
                       <div className="form-outline">
                         <input
                           type="text"
                           id="form3Example1"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
                           className="form-control"
                         />
                         <label className="form-label" for="form3Example1">
@@ -29,6 +49,8 @@ const Register = () => {
                         <input
                           type="text"
                           id="form3Example2"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
                           className="form-control"
                         />
                         <label className="form-label" for="form3Example2">
@@ -42,6 +64,8 @@ const Register = () => {
                     <input
                       type="email"
                       id="form3Example3"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="form-control"
                     />
                     <label className="form-label" for="form3Example3">
@@ -53,6 +77,8 @@ const Register = () => {
                     <input
                       type="password"
                       id="form3Example4"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       className="form-control"
                     />
                     <label className="form-label" for="form3Example4">
