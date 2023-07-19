@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -15,9 +16,26 @@ const Register = () => {
     phone,
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(user);
+
+    try {
+      const user = {
+        name,
+        email,
+        password,
+        phone,
+      };
+      const result = await axios.post("/api/users/register", user);
+      setEmail("");
+      setName("");
+      setPassword("");
+      setPhone("");
+      alert("Register Successful");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

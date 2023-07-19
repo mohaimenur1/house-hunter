@@ -3,6 +3,7 @@ const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 
 const houses = require("./models/houseModel");
+const userRoute = require("./routes/userRoute");
 
 dotenv.config();
 
@@ -12,9 +13,7 @@ const port = process.env.PORT || 8000;
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Api is running");
-});
+app.use(express.json());
 
 app.get("/api/products", async (req, res) => {
   const housesData = await houses.find({});
@@ -39,6 +38,24 @@ app.get("/api/products/:id", async (req, res) => {
     });
   }
 });
+
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve();
+  app.use("/uploads", express.static("/var/data/uploads"));
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
+} else {
+  const __dirname = path.resolve();
+  app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+  app.get("/", (req, res) => {
+    res.send("API is running....");
+  });
+}
+
+app.use("/api/users/register", userRoute);
 
 app.listen(port, () => {
   console.log(`server running on port ${port}`);
