@@ -8,7 +8,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const { data } = await axios.get("/api/products");
-      // console.log(res);
+      console.log(data);
       setProducts(data);
     };
     fetchProducts();
@@ -17,9 +17,9 @@ const HomePage = () => {
   return (
     <>
       <div className="container">
-        <div className="row  mt-5">
-          {products.map((product) => {
-            return <Card key={product.id} product={product}></Card>;
+        <div className="row mt-5">
+          {products?.housesData?.map((product) => {
+            return <Card key={product._id} product={product}></Card>;
           })}
         </div>
       </div>

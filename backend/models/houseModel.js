@@ -16,7 +16,7 @@ const houseModel = new mongoose.Schema(
       required: true,
     },
     city: {
-      type: STring,
+      type: String,
       required: true,
     },
     bedrooms: {
@@ -31,7 +31,7 @@ const houseModel = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    picture: {
+    image: {
       type: String,
       required: true,
     },
@@ -54,4 +54,4 @@ const houseModel = new mongoose.Schema(
 );
 
 const House = mongoose.model("Houses", houseModel);
-exports.module = House;
+module.exports = House;
