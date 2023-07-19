@@ -14,6 +14,7 @@ import HomePage from "./pages/HomePage.jsx";
 import SingleHouse from "./pages/SingleHouse.jsx";
 import store from "./store.js";
 import Register from "./pages/Register.jsx";
+import Login from "./pages/Login.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<HomePage />} />
       <Route path="/api/products/:id" element={<SingleHouse />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
     </Route>
   )
 );
